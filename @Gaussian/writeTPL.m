@@ -26,7 +26,9 @@ function tempDir = writeTPL(obj,jobname,atoms,keywords,rLink)
        fwrite(fid1,newline);
     end
     if (nargin > 4)
-       fwrite(fid1,[' H ',num2str(rLink(:)'),newline]);
+       for i = 1:length(rLink)
+           fwrite(fid1,[' H ',num2str(rLink{i}(:)'),newline]);
+       end
     end
     fwrite(fid1,newline);
 
