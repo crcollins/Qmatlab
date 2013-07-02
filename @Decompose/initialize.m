@@ -45,11 +45,15 @@ end
 icount = 1;
 for ifrag = 1:length(obj.fragList)
    ft = obj.frags{ifrag};
-   obj.nonLink{ifrag} = find(ft.atom ~= ft.atom(end));
+   if ifrag ~= length(obj.fragList) && ifrag ~= 1
+       obj.nonLink{ifrag} = find(ft.atom ~= ft.atom(end) & ft.atom ~= ft.atom(end-1));
+   else
+       obj.nonLink{ifrag} = find(ft.atom ~= ft.atom(end));
+   end
    lengthNonLink = length(obj.nonLink{ifrag});
    % assume same ordering of orbs in full as frag, without link
    obj.maps{ifrag} = icount:(icount + lengthNonLink - 1);
-   icount = icount + lengthNonLink - 1;
+   icount = icount + lengthNonLink;
 end
 
 % calculate overlaps
