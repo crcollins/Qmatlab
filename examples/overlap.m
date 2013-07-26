@@ -53,7 +53,7 @@ for i = 1:length(mols)
     frags{i,3} = temp2;
 
 %%  Draw
-    figure;
+    figNum = figure;
     points = [0    0.5;
               2.25 2.75;
               4.5 5];
@@ -87,7 +87,7 @@ for i = 1:length(mols)
     dottedpoints = [points(1,2)+dx points(2,1)-dx;
                     points(2,2)+dx points(3,1)-dx];
     threshold = .25;
-    
+
     for j = 1:length(Eorbs{1})
         for k = 1:length(Eorbs{2})
             if temp1(j,k)>threshold
@@ -107,25 +107,25 @@ for i = 1:length(mols)
             end
         end
     end
-    
+
     scale = .075;
     xoffset = [-.75 .5 -.5 .75];
     center = mean(points(2,:));
     homo = m.Nelectrons/2;
-    
+
     % draw structures and orb magnitudes
     for j = -1:2
         offset = center+xoffset(j+2);
-        drawStructureOrb(m, homo+j, offset, scale);
+        drawStructureOrb(figNum, m, homo+j, offset, scale);
     end
-    
+
     values = {'left', f1, 1; 'right', f2, -1};
     for j = 1:size(values,1)
         homo = values{j,2}.Nelectrons/2;
         center = mean(points(2-values{j,3},:));
         for k = 0:1
             offset = center+.5*values{j,3};
-            drawStructureOrb(f1, homo+k, offset, scale);
+            drawStructureOrb(figNum, f1, homo+k, offset, scale);
         end
     end
 end

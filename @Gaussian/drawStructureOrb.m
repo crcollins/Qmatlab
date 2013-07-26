@@ -1,4 +1,5 @@
-function drawStructureOrb(obj, orbital, offset, scale)
+function drawStructureOrb(obj, figNum, orbital, offset, scale)
+    figure(figNum);
     posx = obj.rcart(1,:)+offset(1);
     posy = obj.rcart(2,:)+offset(2);
 

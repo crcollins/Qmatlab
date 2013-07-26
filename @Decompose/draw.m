@@ -45,12 +45,14 @@ homo = ceil(obj.full.Nelectrons/2);
 for i = -1:2
     center(1) = -bb.minx - (bb.width/2);
     center(2) = -bb.miny - (bb.height/2) + bb.height * (yoffset(i+2));
+
+    % flip center if they sides to not match up with the fragments
     if obj.full.rcart(1,obj.links(1)) > obj.full.rcart(1,obj.links(2))
         s = [-1 * scale(1), scale(2)];
     else
         s = scale;
     end
-    obj.full.drawStructureOrb(homo+i, center, s);
+    obj.full.drawStructureOrb(figNum+1, homo+i, center, s);
     obj.drawPercents(figNum+1, homo+i, [0, center(2)], (bb.width/2));
 end
 
@@ -59,15 +61,16 @@ for j = 1:size(values,1)
     homo = ceil(values{j,2}.Nelectrons/2);
     tbb = values{j,2}.boundingBox();
 
+    % flip fragments if they do not match the center
     if (j == 1 && values{j,2}.rcart(1,end) ~= tbb.maxx) || (j == 2 && values{j,2}.rcart(1,end) ~= tbb.minx)
         values{j,2}.rcart(1,:) = values{j,2}.rcart(1,:) * -1;
     end
-    
+
     tbb = values{j,2}.boundingBox();
     for k = 0:1
         center(1) = -tbb.minx - (tbb.width/2) + (bb.width) * xoffset(j) + sign(xoffset(j))*tbb.width/2;
         center(2) = -tbb.miny - (tbb.height/2) + tbb.height * (yoffset(k+2));
-        values{j,2}.drawStructureOrb(homo+k, center, scale);
+        values{j,2}.drawStructureOrb(figNum+1, homo+k, center, scale);
     end
 end
 
