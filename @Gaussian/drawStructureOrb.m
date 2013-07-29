@@ -1,4 +1,9 @@
 function drawStructureOrb(obj, figNum, orbital, offset, scale)
+    % Draws the structure of the molecule with the addition of circles
+    % corresponding to the magnitude of the Pi character
+    % offset (x, y) coord pair of how to shift the whole molecule
+    % scale (x, y) pair of how much to scale the molecule on a given axis (
+    % mainly used to flip the molecule on the axis)
     figure(figNum);
     posx = obj.rcart(1,:)+offset(1);
     posy = obj.rcart(2,:)+offset(2);
@@ -7,12 +12,12 @@ function drawStructureOrb(obj, figNum, orbital, offset, scale)
     for j=1:size(obj.rcart,2)
         for k=j+1:size(obj.rcart,2)
             if any(obj.Z([j k]) == 1)
-                limit = 1.15;
+                limit = 1.15; % H-X bond length that seems to work
             else
                 if any(obj.Z([j k]) > 6)
-                    limit = 2;
+                    limit = 2; % bond length for larger atoms that works
                 else
-                    limit = 1.7;
+                    limit = 1.7; % bond length for carbons that works
                 end
             end
             delta = obj.rcart(:,j) - obj.rcart(:,k);
@@ -26,13 +31,14 @@ function drawStructureOrb(obj, figNum, orbital, offset, scale)
             end
         end
         if obj.Z(j) > 6
+            % draw dots if atomic number is greater than carbon
             switch obj.Z(j)
                case 8
-                   color = 'r';
+                    color = 'r';
                 case 15
-                  color = [1 .5 0];
+                    color = [1 .5 0];
                 case 16
-                  color = 'y';
+                    color = 'y';
             end
             hold on;
             t = abs(scale)*.1;
@@ -48,6 +54,7 @@ function drawStructureOrb(obj, figNum, orbital, offset, scale)
         if length(a1) == 0
             continue
         end
+        % area of the circle is poroptional to the pi character
         r = sign(sum(a1)) * sqrt(norm(a1) * abs(scale(1)) * 2);
         x = posx(j) * scale(1);
         y = posy(j) * scale(2);

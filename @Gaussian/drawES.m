@@ -1,4 +1,6 @@
 function drawES(obj,figNum,width,xoffset)
+    % width the width of the line ot draw for the energy level
+    % xoffset the offset of where the line is located
     if (nargin < 2)
        figNum = 1;
     end
