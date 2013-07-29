@@ -1,4 +1,6 @@
 classdef Controller < handle
+    % Controller handles all of the automation of running multiple
+    % calculations on the same molecule. 
     properties
         dataPath    % The path to the directory that contains the template
         template    % The name of the template file without the path/file ext

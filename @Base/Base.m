@@ -1,6 +1,7 @@
 classdef Base < handle
-    %BASE Summary of this class goes here
-    %   Detailed explanation goes here
+    % This is a common base class from which all the other calculation
+    % classes inherit from (Gaussian, Indo, Ampac, etc)
+    % It defines the common API by which Controller can use them all
     
     properties
         dataPath
