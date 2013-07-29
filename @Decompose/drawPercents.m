@@ -1,4 +1,5 @@
 function drawPercents(obj, figNum, orb, center, xoffset)
+    % Draws the percent overlap for the given orbital
     figure(figNum);
     hold on;
     

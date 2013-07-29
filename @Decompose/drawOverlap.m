@@ -1,4 +1,12 @@
 function drawOverlap(obj, figNum, ifrag, piOnly, xs, threshold)
+    % draw overlap lines for a fragment
+    % figNum the number of the figure to draw on
+    % ifrag the number of the fragment to use
+    % piOnly a boolean value to toggle showing the pi orbitals
+    %        if this is true then only the pi orbitals will be drawn
+    % xs is the left and right x coords for drawing the dotted lines
+    % threshold is an optional argument to set the limit on what is counted
+    %           as an overlap
     figure(figNum);
     hold on;
     if nargin < 5
