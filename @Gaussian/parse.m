@@ -259,6 +259,8 @@ loc = utils.findText(text, phrase, issueErrors);
 obj.multiplicity = str2double(text{loc+2});
 
 
+
+% All log parsing is in a try block because the log file might not exist
 try
     log_file = [obj.dataPath, obj.filename, '.log'];
     fid1 = fopen(log_file,'r');
@@ -266,7 +268,7 @@ try
     t1 = textscan(fid1,'%s');
     fclose(fid1);
     text = t1{1};
-    
+
     phrase = {'#'};
     loc = utils.findText(text, phrase, issueErrors);
     words = {};
@@ -276,7 +278,9 @@ try
         words{i} = text{loc+i};
     end
     obj.keywords = words;
-    
+
+    % The overlap matrix is in a second try block because it requires an
+    % IOP code to get it to show up in the log file. ( iop(3/33=4) )
     try
         phrase = {'***','Overlap','***'};
         loc = utils.findText(text, phrase, issueErrors);
@@ -308,7 +312,8 @@ try
            end
         end
     end
-
+    
+    % excited states will only appear in the log if the calculation was TD
     try
         % EXCITED STATES
         phrase = {'Excited', 'State'};
