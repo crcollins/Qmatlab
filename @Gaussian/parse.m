@@ -269,6 +269,18 @@ try
     fclose(fid1);
     text = t1{1};
 
+    if isempty(obj.dipole)
+        phrase = {'Dipole', 'moment'};
+        loc = utils.findText(text, phrase, issueErrors);
+        obj.dipole(1) = str2double(text{loc+6});
+        obj.dipole(2) = str2double(text{loc+8});
+        obj.dipole(3) = str2double(text{loc+10});
+
+        for i=1:3
+          obj.dipole(i) = str2double(text{loc+4+2*i});
+        end
+    end
+    
     phrase = {'#'};
     loc = utils.findText(text, phrase, issueErrors);
     words = {};
