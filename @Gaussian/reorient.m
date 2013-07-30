@@ -18,6 +18,7 @@ function reorient(obj)
 
     bb = obj.boundingBox();
     minpoint = obj.rcart(:,find(obj.rcart(1,:)==bb.minx));
+    % use principal component analysis to find the angle of the molecule
     temp = princomp(obj.rcart(1:2,:)');
     angle = atan2(temp(1,2), temp(1,1));
     R = [cos(angle),-sin(angle); sin(angle),cos(angle)];

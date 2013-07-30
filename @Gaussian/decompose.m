@@ -1,6 +1,7 @@
 function values = decompose(obj, atomLists, orbital)
     % Calculate the percent contribution of a list of atoms to a given
-    % orbital
+    % atomLists a cell array of arrays of atoms on each fragment 
+    % orbital the orbital to do the decomposition on
     ranges = cell(length(atomLists),1);
     for i = 1:length(atomLists)
         ranges{i} = ismember(obj.atom,atomLists{i});
